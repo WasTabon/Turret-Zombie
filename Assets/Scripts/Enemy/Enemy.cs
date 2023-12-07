@@ -9,6 +9,11 @@ public class Enemy : Character
         base.Start();
     }
     
+    protected override void Move()
+    {
+        
+    }
+    
     private void OnTriggerStay(Collider coll)
     {
         if (coll.TryGetComponent(out Car car))
