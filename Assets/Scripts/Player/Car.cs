@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Zenject;
@@ -15,9 +16,12 @@ public class Car : Character
     [SerializeField] private MeshRenderer _meshRenderer;
     
     [Inject] private LevelStartController _levelStartController;
+    [Inject] private LevelEndController _levelEndController;
     
     private bool _isDeadFlag = false;
     private bool _canMove;
+
+    public event Action dead;
     
     private Rigidbody _rigidbody;
     
@@ -31,6 +35,7 @@ public class Car : Character
         _orignialColor = _meshRenderer.material.color;
 
         _levelStartController.startGame += StartMovement;
+        _levelEndController.won += Won;
     }
 
     protected override void Update()
@@ -83,11 +88,17 @@ public class Car : Character
             spawnPosition += halfHeightOffset; // Применяем смещение к позиции спавна
             Instantiate(_deathEffect, spawnPosition, Quaternion.identity);
             SetDeath();
+            dead?.Invoke();
         }
     }
     private void SetDeath()
     {
         gameObject.SetActive(false);
+    }
+
+    private void Won()
+    {
+        _canMove = false;
     }
     
     private IEnumerator HitChangeColor()

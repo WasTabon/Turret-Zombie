@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 public class LevelStartController : MonoBehaviour
@@ -11,22 +12,49 @@ public class LevelStartController : MonoBehaviour
     [HideInInspector] public bool enemySpawning;
 
     [Inject] private InputManager _inputManager;
+    [Inject] private LevelEndController _levelEndController;
+    
+    private bool _canRestartGame;
 
+    private Car _car;
+    
     private void Start()
     {
+        _car = GameObject.FindWithTag("Player").GetComponent<Car>();
+        
         _inputManager.clickOnScreen += StartGame;
+        _inputManager.clickOnScreen += RestartGame;
+
+        _levelEndController.won += InvokeEventRestart;
+        _car.dead += InvokeEventRestart;
     }
 
     private void StartGame()
     {
-        float animLenght = 1f;
-        _cameraAnimator.SetTrigger("StartGame");
-        Invoke("InvokeEvent", animLenght);
+        if (_canRestartGame == false)
+        {
+            float animLenght = 1f;
+            _cameraAnimator.SetTrigger("StartGame");
+            Invoke("InvokeEventStart", animLenght);
+        }
     }
 
-    private void InvokeEvent()
+    private void RestartGame()
+    {
+        if (_canRestartGame)
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
+    }
+    
+    private void InvokeEventStart()
     {
         Destroy(_cameraAnimator);
         startGame?.Invoke();
+    }
+
+    private void InvokeEventRestart()
+    {
+        _canRestartGame = true;
     }
 }
