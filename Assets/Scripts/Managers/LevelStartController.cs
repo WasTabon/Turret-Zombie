@@ -7,6 +7,7 @@ public class LevelStartController : MonoBehaviour
 {
     [SerializeField] private Animator _cameraAnimator;
     public event Action startGame;
+    public event Action endGame;
     
     [HideInInspector] public bool playerMoving;
     [HideInInspector] public bool enemySpawning;
@@ -56,5 +57,6 @@ public class LevelStartController : MonoBehaviour
     private void InvokeEventRestart()
     {
         _canRestartGame = true;
+        endGame?.Invoke();
     }
 }

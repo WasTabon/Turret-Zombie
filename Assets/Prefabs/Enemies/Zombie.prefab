@@ -520,7 +520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthToSet: 100
   speed: 10
-  _damage: 101
+  _damage: 5
   hitColor: {r: 0.013375282, g: 1, b: 0, a: 1}
   _deathEffect: {fileID: 1847846912757981008, guid: b51bc9026b4fd6944bbee75b0d045646, type: 3}
 --- !u!65 &4295439993370418117

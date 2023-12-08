@@ -12,4 +12,12 @@ public class LevelEndController : MonoBehaviour
             won?.Invoke();
         }
     }
+
+    private void OnCollisionEnter(Collision coll)
+    {
+        if (coll.gameObject.CompareTag("Player"))
+        {
+            won?.Invoke();
+        }
+    }
 }

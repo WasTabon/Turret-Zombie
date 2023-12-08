@@ -14,16 +14,24 @@ public class Shoot : MonoBehaviour
     [Inject] private LevelStartController _levelStartController;
     public BooletSpawner _BulletSpawner;
 
-    [SerializeField] private bool _canShoot;
+    [SerializeField] private bool _canShoot = true;
     
     private void Start()
     {
         _levelStartController.startGame += StartShooting;
+        _levelStartController.endGame += StopShooting;
+
+        _canShoot = true;
     }
 
     private void StartShooting()
     {
         StartCoroutine(Shooting());
+    }
+
+    private void StopShooting()
+    {
+        _canShoot = false;
     }
     
     private IEnumerator Shooting()
