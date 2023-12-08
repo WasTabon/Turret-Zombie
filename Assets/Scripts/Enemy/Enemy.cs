@@ -97,9 +97,9 @@ public class Enemy : Character
         if (_healthSystem.Health <= 0 && _isDeadFlag == false)
         {
             _isDeadFlag = true;
-            Vector3 spawnPosition = transform.position; // Получаем позицию объекта
-            Vector3 halfHeightOffset = new Vector3(0, transform.localScale.y * 0.5f, 0); // Определяем смещение на половину высоты объекта
-            spawnPosition += halfHeightOffset; // Применяем смещение к позиции спавна
+            Vector3 spawnPosition = transform.position;
+            Vector3 halfHeightOffset = new Vector3(0, transform.localScale.y * 0.5f, 0);
+            spawnPosition += halfHeightOffset;
             _animator.SetTrigger("Die");
             Instantiate(_deathEffect, spawnPosition, Quaternion.identity);
             Invoke("SetDeath", 1f);

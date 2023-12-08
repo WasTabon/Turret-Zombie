@@ -43,10 +43,8 @@ public class EnemySpawner : MonoBehaviour
         var enemy = _pool.GetFreeElement();
         if (enemy != null)
         {
-            // Генерируем случайную позицию по оси X в заданном диапазоне
-            float randomX = Random.Range(-10f, 10f); // Здесь можно указать нужный диапазон значений по оси X
+            float randomX = Random.Range(-10f, 10f);
     
-            // Располагаем врага на расстоянии 200f от игрока, с случайной позицией по X
             Vector3 spawnPosition = _playerTransform.position + new Vector3(randomX, 4f, _distanceFromPlayerToSpawn);
             enemy.transform.position = spawnPosition;
             enemy.gameObject.SetActive(true);
