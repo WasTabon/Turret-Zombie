@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour, IDamageable
@@ -11,7 +13,12 @@ public abstract class Character : MonoBehaviour, IDamageable
     {
         _healthSystem = new HealthSystem(healthToSet);
     }
-    
+
+    protected virtual void Update()
+    {
+        Move();
+    }
+
     public void DealDamage(int damageAmount)
     {
         Damage(damageAmount);
@@ -25,5 +32,10 @@ public abstract class Character : MonoBehaviour, IDamageable
     protected virtual void Damage(int damageAmount)
     {
         _healthSystem.Damage(damageAmount);
+    }
+
+    protected virtual void Death()
+    {
+        
     }
 }

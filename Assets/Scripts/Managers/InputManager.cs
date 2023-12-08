@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
     [HideInInspector] public bool _isTouchingScreen;
+    public event Action clickOnScreen;
     
     private Vector2 _touchPosition;
 
@@ -33,6 +35,12 @@ public class InputManager : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
+            
+            if (touch.phase == TouchPhase.Began)
+            {
+                clickOnScreen?.Invoke();
+            }
+            
             if (touch.phase == TouchPhase.Moved)
             {
                 _isTouchingScreen = true;
@@ -52,6 +60,7 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            clickOnScreen?.Invoke();
             lastMousePosition = Input.mousePosition;
         }
         

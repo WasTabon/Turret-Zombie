@@ -12,16 +12,20 @@ public class Shoot : MonoBehaviour
     [SerializeField] private float _repulsionDelay;
 
     [Inject] private LevelStartController _levelStartController;
-    //[Inject] private BooletSpawner _booletSpawner;
     public BooletSpawner _BulletSpawner;
 
     [SerializeField] private bool _canShoot;
     
     private void Start()
     {
-        StartCoroutine(Shooting());
+        _levelStartController.startGame += StartShooting;
     }
 
+    private void StartShooting()
+    {
+        StartCoroutine(Shooting());
+    }
+    
     private IEnumerator Shooting()
     {
         while (_canShoot)

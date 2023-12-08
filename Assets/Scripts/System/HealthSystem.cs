@@ -17,4 +17,9 @@ public class HealthSystem
         _health -= damageAmount;
         if (_health < 0) _health = 0;
     }
+
+    public void Heal(int healAmount)
+    {
+        _health += healAmount;
+    }
 }

@@ -22,13 +22,16 @@ public class Bullet : MonoBehaviour
         transform.Translate(transform.forward * -1 * _speed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter(Collider coll)
+    private void OnCollisionEnter(Collision coll)
     {
         if (coll.gameObject.CompareTag("Enemy"))
         {
-            coll.TryGetComponent(out IDamageable hit);
-            hit.DealDamage(_damage);
-            Disappear();
+            IDamageable hit = coll.gameObject.GetComponent<IDamageable>();
+            if (hit != null)
+            {
+                hit.DealDamage(_damage);
+                Disappear();
+            }
         }
     }
 

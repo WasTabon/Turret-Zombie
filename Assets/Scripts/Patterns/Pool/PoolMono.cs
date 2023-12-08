@@ -52,7 +52,9 @@ public class PoolMono<T> where T : MonoBehaviour
     public T GetFreeElement()
     {
         if (HasFreeElement(out T freeElement))
+        {
             return freeElement;
+        }
 
         if (_autoExpand)
             return CreateObject();
