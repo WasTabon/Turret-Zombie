@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 9221460634470310992}
   m_Layer: 0
   m_Name: Zombie
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -516,6 +516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthToSet: 0
+  hitColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &4532271890007664455
 GameObject:
   m_ObjectHideFlags: 0

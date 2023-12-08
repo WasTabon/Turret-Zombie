@@ -22,12 +22,9 @@ public class BooletSpawner : MonoBehaviour
     
     public void Spawn(Transform shootTransform, Transform rotationTransform)
     {
-        Debug.Log("Spawn called");
         var bullet =  _pool.GetFreeElement();
-        Debug.Log("Free element");
         if (bullet != null)
         {
-            Debug.Log("Got bullet");
             bullet.transform.position = shootTransform.position;
             Quaternion rotateDir = rotationTransform.rotation;
             bullet.transform.rotation = rotateDir;
